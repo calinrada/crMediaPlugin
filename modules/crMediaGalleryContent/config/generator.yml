@@ -17,7 +17,7 @@ generator:
         gallery_id: { title: Calin }
       list:
         title: Media content
-        display: [content, gallery_id, type, is_published, allow_comments, allow_votes]
+        display: [name, content, gallery_id, type, is_published, allow_comments, allow_votes]
       filter:
         display: [name, description, type, gallery_id]
       form:    ~

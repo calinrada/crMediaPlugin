@@ -3,9 +3,9 @@
 /**
  * PlugincrMediaGalleryContent form.
  *
- * @package    ##PROJECT_NAME##
- * @subpackage form
- * @author     ##AUTHOR_NAME##
+ * @package    crEngine
+ * @subpackage crMediaPlugin :: crMediaGalleryContent
+ * @author     Calin Rada <calin.rada@yahoo.com>
  * @version    SVN: $Id: sfDoctrineFormPluginTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContentForm
@@ -13,18 +13,28 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
   public function configure()
   {
     $request = sfContext::getInstance()->getRequest();
-    unset($this['created_at'],$this['updated_at'],$this['created_by'],$this['updated_by']);
+    unset(
+            $this['created_at'],
+            $this['updated_at'],
+            $this['created_by'],
+            $this['updated_by'],
+            $this['old_content']
+            );
+
     $this->widgetSchema['content'] = new sfWidgetFormInputFile();
     $this->validatorSchema['content'] = new sfValidatorFile(array(
       'required'   => true,
-      'path'       => sfConfig::get('sf_upload_dir').'/galleries/'.$request->getPostParameter('gallery_id',1),
+      'path'       => sfConfig::get('sf_upload_dir').'/galleries',
       'mime_types' => 'web_images',
-      'max_size' => 500000,
+      'max_size' => 1000000,
       'validated_file_class' => 'crValidatedFile',
     ));
 
-    $this->widgetSchema['old_content'] = new sfWidgetFormInput(array(),array('value'=>'xxx'));
+    if(!$this->isNew())
+    {
+      unset($this['content']);
+    }
 
-
+    //$this->widgetSchema['old_content'] = new sfWidgetFormInput(array(),array('value'=>'xxx'));
   }
 }

@@ -64,6 +64,18 @@
         <source>Category</source>
         <target>Categoria</target>
       </trans-unit>
+      <trans-unit id="type">
+        <source>Type</source>
+        <target>Tip</target>
+      </trans-unit>
+      <trans-unit id="allow_votes">
+        <source>Allow votes</source>
+        <target>Permit voturi</target>
+      </trans-unit>
+      <trans-unit id="content">
+        <source>Content</source>
+        <target>Continut</target>
+      </trans-unit>
       <trans-unit id="category_details">
         <source>Category details</source>
         <target>Detalii categorie</target>
