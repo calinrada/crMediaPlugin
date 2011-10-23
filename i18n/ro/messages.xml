@@ -76,6 +76,22 @@
         <source>Content</source>
         <target>Continut</target>
       </trans-unit>
+      <trans-unit id="image">
+        <source>image</source>
+        <target>imagine</target>
+      </trans-unit>
+      <trans-unit id="video">
+        <source>video</source>
+        <target>video</target>
+      </trans-unit>
+      <trans-unit id="audio">
+        <source>audio</source>
+        <target>audio</target>
+      </trans-unit>
+      <trans-unit id="galleries_content">
+        <source>Galleries content</source>
+        <target>Continut galerii</target>
+      </trans-unit>
       <trans-unit id="category_details">
         <source>Category details</source>
         <target>Detalii categorie</target>
