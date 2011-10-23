@@ -1,0 +1,33 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           crMediaGallery
+    theme:                 thexAdmin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cr_media_gallery
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Gallery
+        display:
+          - name
+          - is_published
+          - allow_comments
+          - allow_votes
+          - created_at
+          - created_by
+      filter:  ~
+      form:
+        display:
+          "Gallery details": [name, description, slug, allow_comments, is_published, allow_votes]
+      edit:
+        title: Editing gallery "%%name%%"
+      new:
+        title: Add new gallery

@@ -1,0 +1,25 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           crMediaGalleryContent
+    theme:                 thexAdmin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cr_media_gallery_content
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        gallery_id: { title: Calin }
+      list:
+        title: Media content
+        display: [content, gallery_id, type, is_published, allow_comments, allow_votes]
+      filter:
+        display: [name, description, type, gallery_id]
+      form:    ~
+      edit:    ~
+      new:     ~

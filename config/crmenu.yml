@@ -1,0 +1,13 @@
+Media:
+  link:   "javascript:;"
+  name:   Media
+  class:  users_link
+  submenu:
+    Gallery:
+      link:   cr_media_gallery
+      name:   Gallery
+      class:  users_link
+    Galleries content:
+      link:   cr_media_gallery_content
+      name:   Galleries content
+      class:  users_link

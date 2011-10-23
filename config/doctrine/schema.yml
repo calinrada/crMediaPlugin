@@ -1,0 +1,38 @@
+crMediaGallery:
+  actAs:
+    Timestampable: ~
+    Signable: ~
+    Sluggable:
+      fields: [name]
+      name: slug    # defaults to 'slug'
+      type: string  # defaults to 'clob'
+      length: 255   # defaults to null. clob doesn't require a length
+  columns:
+    name:           { type: string(255), notnull: true }
+    description:    { type: string(255) }
+    allow_comments: { type: boolean, default: 1 }
+    is_published:   { type: boolean, default: 1 }
+    allow_votes:    { type: boolean, default: 1 }
+
+
+crMediaGalleryContent:
+  actAs:
+    Timestampable: ~
+    Signable: ~
+    Sluggable:
+      fields: [name]
+      name: slug    # defaults to 'slug'
+      type: string  # defaults to 'clob'
+      length: 255   # defaults to null. clob doesn't require a length
+  columns:
+    name:           { type: string(255) }
+    description:    { type: text }
+    content:        { type: text }
+    type:           { type: enum, values: [image,video,audio], default: image, fixed: true }
+    tags:           { type: string(255) }
+    gallery_id:     { type: integer(5) }
+    allow_comments: { type: boolean, default: 1 }
+    is_published:   { type: boolean, default: 1 }
+    allow_votes:    { type: boolean, default: 1 }
+  relations:
+    crMediaGallery: { onDelete: CASCADE, local: gallery_id, foreign: id, foreignAlias: Gallery }
