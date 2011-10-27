@@ -12,29 +12,49 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
 {
   public function configure()
   {
-    $request = sfContext::getInstance()->getRequest();
-    unset(
-            $this['created_at'],
-            $this['updated_at'],
-            $this['created_by'],
-            $this['updated_by'],
-            $this['old_content']
-            );
+    $this->removeFields();
+    $this->setUploadField();
+  }
 
-    $this->widgetSchema['content'] = new sfWidgetFormInputFile();
+  /**
+   * We remove uneccessary fields
+   */
+  protected function removeFields()
+  {
+    unset(
+      $this['created_at'], $this['updated_at'],
+      $this['created_by'], $this['updated_by'],
+      $this['old_content']
+    );
+  }
+
+  /**
+   * We set the upload filed and validators
+   */
+  protected function setUploadField()
+  {
+    if(null != $this->getObject()->getContent())
+    {
+      $this->widgetSchema['content'] = new sfWidgetFormInputFileEditable(array(
+        'file_src'  => '/uploads/galleries/'.$this->getObject()->getContent(),
+        'edit_mode' => !$this->isNew(),
+        'template'  => '<div>%input% <a href="%file%" rel="prettyPhoto" title="'.$this->getObject()->getName().'">Vezi</a> <a href="http://www.youtube.com/watch?v=bkGwYb8uY18" id="home-intro-video" rel="prettyPhoto">Watch</a> <br />%delete% %delete_label%</div>',
+        'with_delete' => true,
+      ));
+    }
+    else
+    {
+      $this->widgetSchema['content'] = new sfWidgetFormInputFile();
+    }
+
     $this->validatorSchema['content'] = new sfValidatorFile(array(
-      'required'   => true,
+      'required'   => false,
       'path'       => sfConfig::get('sf_upload_dir').'/galleries',
       'mime_types' => 'web_images',
       'max_size' => 1000000,
       'validated_file_class' => 'crValidatedFile',
     ));
 
-    if(!$this->isNew())
-    {
-      unset($this['content']);
-    }
-
-    //$this->widgetSchema['old_content'] = new sfWidgetFormInput(array(),array('value'=>'xxx'));
+    $this->validatorSchema['content_delete'] = new sfValidatorPass();
   }
 }

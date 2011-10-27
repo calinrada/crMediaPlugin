@@ -120,6 +120,10 @@
         <source>Media content</source>
         <target>Continut galerii</target>
       </trans-unit>
+      <trans-unit id="remove_the_current_file">
+        <source>remove the current file</source>
+        <target>Elimina fisierul curent</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,4 +1,5 @@
 indexSuccess:
+editSuccess:
   stylesheets:
     - /crWebPlugin/css/prettyPhoto.css
     - /crMediaPlugin/css/crMediaPlugin.css
