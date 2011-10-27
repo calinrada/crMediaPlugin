@@ -1,6 +1,7 @@
 indexSuccess:
   stylesheets:
     - /crWebPlugin/css/prettyPhoto.css
+    - /crMediaPlugin/css/crMediaPlugin.css
 
   javascripts:
     - /crWebPlugin/js/jquery.prettyPhoto.js

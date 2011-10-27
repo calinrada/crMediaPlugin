@@ -116,6 +116,10 @@
         <source>If empty, the system will autogenerate the slug</source>
         <target>Daca nu completati acest camp, sistemul il va genera automat</target>
       </trans-unit>
+      <trans-unit id="media_content">
+        <source>Media content</source>
+        <target>Continut galerii</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
