@@ -124,6 +124,30 @@
         <source>remove the current file</source>
         <target>Elimina fisierul curent</target>
       </trans-unit>
+      <trans-unit id="editing_gallery_content_name">
+        <source>Editing gallery content "%%name%%"</source>
+        <target>Acum editati inregistrarea "%%name%%" din galerie</target>
+      </trans-unit>
+      <trans-unit id="add_new_content_to_gallery">
+        <source>Add new content to gallery</source>
+        <target>Adaugare inregistrare noua in galerie</target>
+      </trans-unit>
+      <trans-unit id="general_information">
+        <source>General information</source>
+        <target>Date generale</target>
+      </trans-unit>
+      <trans-unit id="optional_information">
+        <source>Optional information</source>
+        <target>Date optionale</target>
+      </trans-unit>
+      <trans-unit id="preview">
+        <source>Preview</source>
+        <target>Previzualizare</target>
+      </trans-unit>
+      <trans-unit id="delete_file_on_save">
+        <source>Delete file on save</source>
+        <target>Elimina fisierul la salvare</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -14,8 +14,8 @@
       case "audio": $src = "/crMediaPlugin/images/icons/audio.png"; break;
     }
   ?>
-  <a href="<?php echo '/uploads/galleries/'.$cr_media_gallery_content->getContent() ?>" rel="prettyPhoto[gallery]">
-  <img src="<?php echo $src ?>" width="24" height="24" title="<?php echo __($type) ?>" />
+  <a href="<?php echo '/uploads/galleries/'.$cr_media_gallery_content->getGalleryId().'/'.$cr_media_gallery_content->getType().'/'.$cr_media_gallery_content->getContent() ?>" rel="prettyPhoto[gallery]">
+  <img src="<?php echo $src ?>" width="24" height="24" title="<?php echo ucfirst(__($type)) ?>" />
   </a>
 </td>
 <td class="sf_admin_boolean sf_admin_list_td_is_published">

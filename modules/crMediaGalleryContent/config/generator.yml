@@ -13,13 +13,18 @@ generator:
 
     config:
       actions: ~
-      fields:
-        gallery_id: { title: Calin }
+      fields: ~
+#        gallery_id: { title: Calin }
       list:
         title: Media content
         display: [name, gallery_id, type, is_published, allow_comments, allow_votes]
       filter:
         display: [name, description, type, gallery_id]
-      form:    ~
-      edit:    ~
-      new:     ~
+      form:
+        display:
+          "General information": [name, description, gallery_id, type, content]
+          "Optional information": [tags, slug, allow_comments, is_published, allow_votes]
+      edit:
+        title: Editing gallery content "%%name%%"
+      new:
+        title: Add new content to gallery
