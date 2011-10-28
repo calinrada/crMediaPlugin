@@ -1,1 +1,3 @@
 Media plugin for crEngine
+
+git submodule add git://github.com/calinrada/crMediaPlugin.git plugins/crMediaPlugin
