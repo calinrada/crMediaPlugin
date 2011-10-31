@@ -10,6 +10,12 @@
  */
 abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContentForm
 {
+  /**
+   * This values are allowed to be created as directories. See
+   * $this->checkUploadDir()
+   */
+  protected $allowed_dir_types = array('image','video','audio');
+
   public function configure()
   {
     $this->removeFields();
@@ -35,8 +41,20 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
    */
   protected function setContentField()
   {
-    $gaid = $this->getObject()->getGalleryId();
-    $type = $this->getObject()->getType();
+    $request = sfContext::getInstance()->getRequest();
+
+    if($request->isMethod('post'))
+    {
+      $form = $request->getParameter('cr_media_gallery_content');
+      $gaid = $form['gallery_id'];
+      $type = $form['type'];
+    }
+    else
+    {
+      $gaid = $this->getObject()->getGalleryId();
+      $type = $this->getObject()->getType();
+    }
+
     $i18n = sfContext::getInstance()->getI18N();
 
     if(null != $this->getObject()->getContent() && ('image'==$type || 'audio'==$type || 'video'==$type) )
@@ -55,9 +73,9 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
 
     $this->validatorSchema['content'] = new sfValidatorFile(array(
       'required'   => false,
-      'path'       => $this->checkUploadDir($gaid,$type),
+      'path'       => $this->checkUploadDir($gaid,$type,($request->isMethod('post')?true:false)),
       'mime_types' => 'web_images',
-      'max_size' => 1000000,
+      'max_size' => 5120000, // 5Mb
       'validated_file_class' => 'crValidatedFile',
     ));
 
@@ -69,26 +87,40 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
    * create it.
    * @param string $gaid
    * @param string $type
+   * @param boolean $create_dir Create dir on post if does not exists
    * @return string
    */
-  protected function checkUploadDir($gaid,$type)
+  protected function checkUploadDir($gaid, $type, $create_dir=false)
   {
     $full_dir = sfConfig::get('sf_upload_dir').'/galleries/'.$gaid.'/'.$type;
     $gall_dir = sfConfig::get('sf_upload_dir').'/galleries/'.$gaid;
 
-    if(!is_readable($gall_dir))
+    if(true==$create_dir)
     {
-      if(!mkdir($gall_dir))
+      if(!is_numeric($gaid))
       {
-        throw new sfException($gall_dir.' does not exists and i can\'t create it.');
+        throw new sfException('Invalid gallery id: '.$gaid);
       }
-    }
 
-    if(!is_readable($full_dir))
-    {
-      if(!mkdir($full_dir))
+      if(!in_array($type, $this->allowed_dir_types))
       {
-        throw new sfException($full_dir.' does not exists and i can\'t create it.');
+        throw new sfException('Invalid gallery type: '.$type);
+      }
+
+      if(!is_readable($gall_dir))
+      {
+        if(!mkdir($gall_dir))
+        {
+          throw new sfException($gall_dir.' does not exists and i can\'t create it.');
+        }
+      }
+
+      if(!is_readable($full_dir))
+      {
+        if(!mkdir($full_dir))
+        {
+          throw new sfException($full_dir.' does not exists and i can\'t create it.');
+        }
       }
     }
 
