@@ -22,7 +22,7 @@ generator:
         display: [name, description, type, gallery_id]
       form:
         display:
-          "General information": [name, description, gallery_id, type, content]
+          "General information": [name, description, gallery_id, type, resize_w, resize_h, content]
           "Optional information": [tags, slug, allow_comments, is_published, allow_votes]
       edit:
         title: Editing gallery content "%%name%%"

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * PlugincrMediaGalleryContent form.
  *
@@ -22,6 +21,16 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
     $this->setContentField();
 
     $this->widgetSchema['description'] = new sfWidgetFormTextarea();
+
+    $this->widgetSchema['resize_w'] = new sfWidgetFormChoice(array('choices'=>$this->getObject()->getResizeOptions()));
+    $this->widgetSchema['resize_h'] = new sfWidgetFormChoice(array('choices'=>$this->getObject()->getResizeOptions()));
+
+    // Must be set the wished value -30; In this case, the default will be 150 and 120
+    $this->setDefaults(array('resize_w'=>120,'resize_h'=>90));
+
+    $this->validatorSchema->setOption('allow_extra_fields', true);
+    $this->validatorSchema->setOption('filter_extra_fields', false);
+
   }
 
   /**
