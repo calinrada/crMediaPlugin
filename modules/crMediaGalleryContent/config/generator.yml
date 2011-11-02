@@ -26,5 +26,8 @@ generator:
           "Optional information": [tags, slug, allow_comments, is_published, allow_votes]
       edit:
         title: Editing gallery content "%%name%%"
+        display:
+          "General information": [name, description, gallery_id, type, content]
+          "Optional information": [tags, slug, allow_comments, is_published, allow_votes]
       new:
         title: Add new content to gallery

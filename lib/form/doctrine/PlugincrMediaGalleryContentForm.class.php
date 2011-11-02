@@ -17,27 +17,12 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
 
   public function configure()
   {
-    $this->removeFields();
-    $this->setContentField();
-
-    $this->widgetSchema['description'] = new sfWidgetFormTextarea();
-
-    $this->widgetSchema['resize_size'] = new crWidgetFormChoiceAndChoice(
-            array(
-              'choiceA'=>array('choices'=>$this->getObject()->getResizeOptions()),
-              'choiceB'=>array('choices'=>$this->getObject()->getResizeOptions()),
-              'format'=>'%choiceA% x %choiceB% px'
-              )
-    );
-
-    //$this->widgetSchema['y'] = new myWidgetFormInputTextAndChoice(array('choice'=>array('choices'=>$choices)));
-
-    // Must be set the wished value -30; In this case, the default will be 150 and 120
-    $this->setDefault('resize_size','120 120');
-
     $this->validatorSchema->setOption('allow_extra_fields', true);
     $this->validatorSchema->setOption('filter_extra_fields', false);
 
+    $this->addCustomFields();
+    $this->removeFields();
+    $this->setContentField();
   }
 
   /**
@@ -49,6 +34,31 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
       $this['created_at'], $this['updated_at'],
       $this['created_by'], $this['updated_by']
     );
+    if(!$this->isNew())
+    {
+      unset($this['type']);
+    }
+  }
+
+  /**
+   * Add custom fields to form
+   */
+  protected function addCustomFields()
+  {
+    if($this->isNew())
+    {
+      $this->widgetSchema['resize_size'] = new crWidgetFormChoiceAndChoice(
+              array(
+                'choiceA'=>array('choices'=>$this->getObject()->getResizeOptions()),
+                'choiceB'=>array('choices'=>$this->getObject()->getResizeOptions()),
+                'format'=>'%choiceA% x %choiceB% px'
+                )
+      );
+      // Must be set the wished value -30; In this case, the default will be 150 and 120
+      $this->setDefault('resize_size','120 120');
+    }
+    $this->widgetSchema['description'] = new sfWidgetFormTextarea();
+
   }
 
   /**
