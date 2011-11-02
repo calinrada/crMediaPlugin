@@ -148,6 +148,10 @@
         <source>Delete file on save</source>
         <target>Elimina fisierul la salvare</target>
       </trans-unit>
+      <trans-unit id="resize_size">
+        <source>Resize size</source>
+        <target>Creez tumbnail</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

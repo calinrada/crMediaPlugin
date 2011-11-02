@@ -59,7 +59,7 @@ abstract class PlugincrMediaGalleryContent extends BasecrMediaGalleryContent
 
       if(file_exists($image)&&!is_dir($image))
       {
-        $size = $this->getResizeOptions($form['resize_w'],$form['resize_h']);
+        $size = $this->getResizeOptions($form['resize_size']['choiceA'],$form['resize_size']['choiceB']);
 
         $thumbnail = new sfThumbnail($size[0], $size[1]);
         $thumbnail->loadFile($image);
@@ -106,7 +106,7 @@ abstract class PlugincrMediaGalleryContent extends BasecrMediaGalleryContent
         throw new sfException('Can\'t delete file: '.$full_dir.$cont);
       }
     }
-    
+
     if('image'==$type && file_exists($full_dir_thumb.$cont) && !is_dir($full_dir_thumb.$cont))
     {
       if(!unlink($full_dir_thumb.$cont))
