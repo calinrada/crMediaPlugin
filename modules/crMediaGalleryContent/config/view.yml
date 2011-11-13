@@ -1,16 +1,11 @@
+all:
+  stylesheets:
+    - /crWebPlugin/css/prettyPhoto.css
+    - /crMediaPlugin/css/crMediaPlugin.css
+
+  javascripts:
+    - /crMediaPlugin/js/crMediaPlugin.js
+    
 indexSuccess:
-  stylesheets:
-    - /crWebPlugin/css/prettyPhoto.css
-    - /crMediaPlugin/css/crMediaPlugin.css
-
   javascripts:
     - /crWebPlugin/js/jquery.prettyPhoto.js
-    - /crMediaPlugin/js/crMediaPlugin.js
-editSuccess:
-  stylesheets:
-    - /crWebPlugin/css/prettyPhoto.css
-    - /crMediaPlugin/css/crMediaPlugin.css
-
-  javascripts:
-    - /crWebPlugin/js/jquery.prettyPhoto.js
-    - /crMediaPlugin/js/crMediaPlugin.js

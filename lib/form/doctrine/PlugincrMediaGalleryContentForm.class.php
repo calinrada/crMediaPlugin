@@ -1,10 +1,11 @@
 <?php
+
 /**
  * PlugincrMediaGalleryContent form.
  *
- * @package    crEngine
- * @subpackage crMediaPlugin :: crMediaGalleryContent
- * @author     Calin Rada <calin.rada@yahoo.com>
+ * @package    ##PROJECT_NAME##
+ * @subpackage form
+ * @author     ##AUTHOR_NAME##
  * @version    SVN: $Id: sfDoctrineFormPluginTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContentForm
@@ -20,9 +21,16 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
     $this->validatorSchema->setOption('allow_extra_fields', true);
     $this->validatorSchema->setOption('filter_extra_fields', false);
 
+
     $this->addCustomFields();
+    $this->setCustomFields();
     $this->removeFields();
     $this->setContentField();
+  }
+
+  public function postConfigure()
+  {
+    echo 'Calin';
   }
 
   /**
@@ -62,6 +70,22 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
   }
 
   /**
+   * Set custom fields to form
+   */
+  protected function setCustomFields()
+  {
+    $this->widgetSchema['type'] = new sfWidgetFormChoice(
+            array(
+                'choices' =>
+                array(
+                  'image' => 'image', 'video' => 'video', 'audio' => 'audio'
+                )
+            ),
+            array('onchange'=>'setMediaType(this.value)')
+    );
+  }
+
+  /**
    * We set the content field and validators. We need to determine if it is
    * an embeded content or user is uploading something.
    */
@@ -85,12 +109,13 @@ abstract class PlugincrMediaGalleryContentForm extends BasecrMediaGalleryContent
 
     if(null != $this->getObject()->getContent() && ('image'==$type || 'audio'==$type || 'video'==$type) )
     {
-      $this->widgetSchema['content'] = new sfWidgetFormInputFileEditable(array(
-        'file_src'  => '/uploads/galleries/'.$gaid.'/'.$type.'/'.$this->getObject()->getContent(),
-        'edit_mode' => !$this->isNew(),
-        'template'  => '<div>%input% <a href="%file%" rel="prettyPhoto" title="'.$this->getObject()->getName().'">'.$i18n->__('Preview').'</a> | '.$i18n->__('Delete file on save').' %delete% </div>',
-        'with_delete' => true,
-      ));
+//      $this->widgetSchema['content'] = new sfWidgetFormInputFileEditable(array(
+//        'file_src'  => '/uploads/galleries/'.$gaid.'/'.$type.'/'.$this->getObject()->getContent(),
+//        'edit_mode' => !$this->isNew(),
+//        'template'  => '<div>%input% <a href="%file%" rel="prettyPhoto" title="'.$this->getObject()->getName().'">'.$i18n->__('Preview').'</a> | '.$i18n->__('Delete file on save').' %delete% </div>',
+//        'with_delete' => true,
+//      ));
+      unset($this['content']);
     }
     else
     {
